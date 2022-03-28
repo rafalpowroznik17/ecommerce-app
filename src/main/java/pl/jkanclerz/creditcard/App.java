@@ -17,7 +17,7 @@ public class App {
         SpringApplication.run(App.class, args);
 
     }
-    
+
     NameProvider createNameProvider() {
         return new NameProvider();
     }

@@ -3,39 +3,17 @@ package pl.rpow.creditcard;
 import java.math.BigDecimal;
 
 public class CreditCard {
-    public static final int CREDIT_MIN_VALUE = 100;
-    private BigDecimal limit;
-    private BigDecimal balance;
-    private String cardName;
+    private BigDecimal initialLimit;
 
-    public CreditCard(String cardName) {
-        this.cardName = cardName;
-    }
-
-    public void assignCreditLimit(BigDecimal creditLimit) {
-        if (isBelowCreditLimit(creditLimit)) {
-            throw new LimitBelowCertainThresholdException();
+    public void assignCreditLimit(BigDecimal newCreditLimit) {
+        if (this.initialLimit == null) {
+            throw new CantAssignLimtiTwiceException();
         }
-        this.limit = creditLimit;
-        this.balance = creditLimit;
+        this.initialLimit = newCreditLimit;
+
     }
 
-    private boolean isBelowCreditLimit(BigDecimal creditLimit) {
-        return BigDecimal.valueOf(CREDIT_MIN_VALUE).compareTo(creditLimit) > 0;
-    }
-
-    public BigDecimal getLimit() {
-        return limit;
-    }
-
-    public void withdraw(BigDecimal money) {
-        if (balance.compareTo(money) < 0) {
-            throw new NotEnoughMoneyException();
-        }
-        balance = balance.subtract(money);
-    }
-
-    public BigDecimal getCurrentBalance() {
-        return balance;
+    public BigDecimal getBalance() {
+        return initialLimit;
     }
 }

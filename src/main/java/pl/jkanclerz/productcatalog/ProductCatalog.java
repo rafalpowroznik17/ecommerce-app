@@ -9,6 +9,8 @@ public class ProductCatalog {
     public ProductCatalog(ProductStorage productStorage) {
         this.productStorage = productStorage;
     }
+
+
     public String addProduct(String productId, String name) {
         ProductData newProduct = new ProductData(productId, name);
         productStorage.save(newProduct);

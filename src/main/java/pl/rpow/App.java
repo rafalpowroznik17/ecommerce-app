@@ -4,8 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.rpow.creditcard.NameProvider;
+import pl.rpow.productcatalog.MapProductStorage;
 import pl.rpow.productcatalog.ProductCatalog;
+import pl.rpow.productcatalog.ProductStorage;
 
+import javax.management.MXBean;
 import java.math.BigDecimal;
 
 @SpringBootApplication
@@ -21,8 +24,13 @@ public class App {
     }
 
     @Bean
-    ProductCatalog createMyProductCatalog() {
-        ProductCatalog productCatalog = new ProductCatalog();
+    ProductStorage createMyProductStorage() {
+        return new MapProductStorage();
+    }
+
+    @Bean
+    ProductCatalog mMyProductCatalog(ProductStorage productStorage) {
+        ProductCatalog productCatalog = new ProductCatalog(productStorage);
         String productId1 = productCatalog.addProduct("lego-set-1", "Nice Lego set");
         productCatalog.assignImage(productId1, "https://picsum.photos/id/237/200/300");
         productCatalog.assignPrice(productId1, BigDecimal.TEN);

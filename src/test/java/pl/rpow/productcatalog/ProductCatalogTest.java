@@ -69,8 +69,6 @@ public class ProductCatalogTest {
         assertEquals(1, products.size());
     }
 
-
-
     private ProductCatalog thereIsProductCatalog() {
         return new ProductCatalog();
     }

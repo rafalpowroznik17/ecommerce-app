@@ -1,4 +1,4 @@
-package pl.jkanclerz.productcatalog;
+package pl.rpow.productcatalog;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

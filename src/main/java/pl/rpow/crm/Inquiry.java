@@ -1,4 +1,4 @@
-package pl.jkanclerz.crm;
+package pl.rpow.crm;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

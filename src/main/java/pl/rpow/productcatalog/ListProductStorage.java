@@ -1,4 +1,4 @@
-package pl.jkanclerz.productcatalog;
+package pl.rpow.productcatalog;
 
 import java.util.List;
 

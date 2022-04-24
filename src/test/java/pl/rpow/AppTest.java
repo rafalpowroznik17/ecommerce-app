@@ -1,4 +1,4 @@
-package pl.jkanclerz;
+package pl.rpow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

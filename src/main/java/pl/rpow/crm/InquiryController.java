@@ -1,4 +1,4 @@
-package pl.jkanclerz.crm;
+package pl.rpow.crm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

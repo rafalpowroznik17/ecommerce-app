@@ -1,4 +1,4 @@
-package pl.jkanclerz.productcatalog;
+package pl.rpow.productcatalog;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

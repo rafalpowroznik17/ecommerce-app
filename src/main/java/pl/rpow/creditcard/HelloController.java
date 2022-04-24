@@ -1,4 +1,4 @@
-package pl.jkanclerz.creditcard;
+package pl.rpow.creditcard;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

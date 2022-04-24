@@ -1,4 +1,4 @@
-package pl.jkanclerz.creditcard;
+package pl.rpow.creditcard;
 
 import java.util.Arrays;
 import java.util.List;

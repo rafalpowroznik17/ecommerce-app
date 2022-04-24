@@ -1,12 +1,12 @@
-package pl.jkanclerz;
+package pl.rpow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.jkanclerz.creditcard.NameProvider;
-import pl.jkanclerz.productcatalog.MapProductStorage;
-import pl.jkanclerz.productcatalog.ProductCatalog;
-import pl.jkanclerz.productcatalog.ProductStorage;
+import pl.rpow.creditcard.NameProvider;
+import pl.rpow.productcatalog.MapProductStorage;
+import pl.rpow.productcatalog.ProductCatalog;
+import pl.rpow.productcatalog.ProductStorage;
 
 import java.math.BigDecimal;
 

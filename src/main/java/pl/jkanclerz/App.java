@@ -7,6 +7,8 @@ import pl.jkanclerz.creditcard.NameProvider;
 import pl.jkanclerz.productcatalog.MapProductStorage;
 import pl.jkanclerz.productcatalog.ProductCatalog;
 import pl.jkanclerz.productcatalog.ProductStorage;
+import pl.jkanclerz.sales.CartStorage;
+import pl.jkanclerz.sales.ProductDetailsProvider;
 import pl.jkanclerz.sales.Sales;
 
 import java.math.BigDecimal;
@@ -46,6 +48,6 @@ public class App {
 
     @Bean
     Sales createSales() {
-        return new Sales();
+        return new Sales(new CartStorage(), new ProductDetailsProvider());
     }
 }

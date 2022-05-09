@@ -21,17 +21,7 @@ public class CollectingProductsTest {
         thereIsXProductsInCustomersCart(customerId, 1);
     }
 
-    private void thereIsXProductsInCustomersCart(String customerId, int expectedItemsCount) {
 
-    }
-
-    private Sales thereIsSalesModule() {
-        return new Sales();
-    }
-
-    private String thereIsProduct(String id, BigDecimal price) {
-        return id;
-    }
 
     @Test
     void itPresentsCurrentOffer() {
@@ -64,4 +54,15 @@ public class CollectingProductsTest {
         return UUID.randomUUID().toString();
     }
 
+    private void thereIsXProductsInCustomersCart(String customerId, int expectedItemsCount) {
+
+    }
+
+    private Sales thereIsSalesModule() {
+        return new Sales();
+    }
+
+    private String thereIsProduct(String id, BigDecimal price) {
+        return id;
+    }
 }

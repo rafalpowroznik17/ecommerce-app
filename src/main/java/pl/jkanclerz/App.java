@@ -6,10 +6,9 @@ import org.springframework.context.annotation.Bean;
 import pl.jkanclerz.creditcard.NameProvider;
 import pl.jkanclerz.productcatalog.MapProductStorage;
 import pl.jkanclerz.productcatalog.ProductCatalog;
+import pl.jkanclerz.productcatalog.ProductData;
 import pl.jkanclerz.productcatalog.ProductStorage;
-import pl.jkanclerz.sales.CartStorage;
-import pl.jkanclerz.sales.ListProductDetailsProvider;
-import pl.jkanclerz.sales.Sales;
+import pl.jkanclerz.sales.*;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -48,7 +47,21 @@ public class App {
     }
 
     @Bean
-    Sales createSales() {
-        return new Sales(new CartStorage(), new ListProductDetailsProvider(Collections.emptyList()));
+    Sales createSales(ProductDetailsProvider productDetailsProvider) {
+        return new Sales(
+                new CartStorage(),
+                productDetailsProvider
+        );
+    }
+
+    @Bean
+    ProductDetailsProvider detailsProvider(ProductCatalog catalog) {
+        return (productId -> {
+            ProductData data = catalog.getDetails(productId);
+            return java.util.Optional.of(new ProductDetails(
+                    data.getId(),
+                    data.getName(),
+                    data.getPrice()));
+        });
     }
 }

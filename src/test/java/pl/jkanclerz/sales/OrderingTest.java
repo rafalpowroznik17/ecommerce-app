@@ -4,18 +4,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderingTest {
 
     private List<ProductDetails> products;
+    private ReservationStorage reservationStorage;
 
     @BeforeEach
     void setUp() {
-        products = Collections.emptyList();
+        products = new ArrayList<>();
+        reservationStorage = new ReservationStorage();
     }
 
     @Test
@@ -32,8 +35,17 @@ public class OrderingTest {
                 seenOffer,
                 getExampleClientData());
         //payemntUrl
+        String reservationId = payment.getReservationId();
 
         assertNotNull(payment.getUrl());
+        assertNotNull(reservationId);
+        thereIsPendingReservationWithId(reservationId);
+    }
+
+    private void thereIsPendingReservationWithId(String reservationId) {
+        Optional<Reservation> optionalReservation = reservationStorage.find(reservationId);
+
+        assertTrue(optionalReservation.isPresent());
     }
 
     @Test
@@ -66,7 +78,9 @@ public class OrderingTest {
     private Sales thereIsSalesModule() {
         return new Sales(
                 new CartStorage(),
-                new ListProductDetailsProvider(products)
+                new ListProductDetailsProvider(products),
+                new DummyPaymentGateway(),
+                reservationStorage
         );
     }
 

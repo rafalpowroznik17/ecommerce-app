@@ -16,6 +16,10 @@ public class Sales {
         Cart cart = cartStorage.getForCustomer(customerId)
                 .orElse(Cart.empty());
 
+        return calculateOffer(cart);
+    }
+
+    private Offer calculateOffer(Cart cart) {
         BigDecimal total = cart
                 .getItems()
                 .stream()
@@ -43,5 +47,12 @@ public class Sales {
                 productDetails.price));
 
         cartStorage.save(customerId, cart);
+    }
+
+    public PaymentData acceptOffer(
+            String customerId,
+            Offer seenOffer,
+            ClientData clientData) {
+        return null;
     }
 }

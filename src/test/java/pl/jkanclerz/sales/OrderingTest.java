@@ -23,20 +23,18 @@ public class OrderingTest {
 
     @Test
     void itAllowsToOrderCollectedProducts() {
+        //Given // Arrange
         String productId = thereIsExampleProduct();
         Sales sales = thereIsSalesModule();
         String customerId = thereIsCustomer();
         sales.addToCart(customerId, productId);
         Offer seenOffer = sales.getCurrentOffer(customerId);
-        //when
 
-        PaymentData payment = sales.acceptOffer(
-                customerId,
-                seenOffer,
-                getExampleClientData());
-        //payemntUrl
+        //when //act
+        PaymentData payment = sales.acceptOffer(customerId, seenOffer, exampleCustomerData());
+
+        //then // assert
         String reservationId = payment.getReservationId();
-
         assertNotNull(payment.getUrl());
         assertNotNull(reservationId);
         thereIsPendingReservationWithId(reservationId);
@@ -62,7 +60,7 @@ public class OrderingTest {
             sales.acceptOffer(
                     customerId,
                     newOffer,
-                    getExampleClientData());
+                    exampleCustomerData());
         });
     }
 
@@ -88,7 +86,7 @@ public class OrderingTest {
         return "Kuba";
     }
 
-    private ClientData getExampleClientData() {
+    private ClientData exampleCustomerData() {
         return ClientData.builder()
                 .firstname("John")
                 .lastname("Doe")

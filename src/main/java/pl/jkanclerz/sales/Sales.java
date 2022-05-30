@@ -8,7 +8,11 @@ public class Sales {
     DummyPaymentGateway paymentGateway;
     ReservationStorage reservationStorage;
 
-    public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider, DummyPaymentGateway paymentGateway, ReservationStorage reservationStorage) {
+    public Sales(
+            CartStorage cartStorage,
+            ProductDetailsProvider productDetailsProvider,
+            DummyPaymentGateway paymentGateway,
+            ReservationStorage reservationStorage) {
         this.cartStorage = cartStorage;
         this.productDetailsProvider = productDetailsProvider;
         this.paymentGateway = paymentGateway;

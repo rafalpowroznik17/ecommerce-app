@@ -1,7 +1,6 @@
 package pl.rpow.sales;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder

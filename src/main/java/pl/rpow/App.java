@@ -11,7 +11,6 @@ import pl.rpow.productcatalog.ProductStorage;
 import pl.rpow.sales.*;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 
 @SpringBootApplication
 public class App {
@@ -50,7 +49,9 @@ public class App {
     Sales createSales(ProductDetailsProvider productDetailsProvider) {
         return new Sales(
                 new CartStorage(),
-                productDetailsProvider
+                productDetailsProvider,
+                new DummyPaymentGateway(),
+                new ReservationStorage()
         );
     }
 

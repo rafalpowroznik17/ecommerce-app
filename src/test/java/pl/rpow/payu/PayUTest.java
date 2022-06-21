@@ -11,12 +11,15 @@ public class PayUTest {
 
     @Test
     void itRegisterExamplePayment() {
+        //A
         PayU payu = thereIsPayUApiClient();
         String reservationId = thereIsExampleReservation();
         OrderCreateRequest request = thereIsExampleOrderCreateRequest();
 
+        //Act
         OrderCreateResponse response = payu.handle(request);
 
+        //Assert
         assertEquals("SUCCESS", response.getStatus().getStatusCode());
         assertNotNull(response.getOrderId());
         assertNotNull(response.getRedirectUri());
@@ -68,7 +71,7 @@ public class PayUTest {
                         .lastName("doe")
                         .email("john@doe.pl")
                         .phone("0202122")
-                        .language("PL")
+                        .language("pl")
                         .build())
                 .products(Arrays.asList(
                         Product.builder()

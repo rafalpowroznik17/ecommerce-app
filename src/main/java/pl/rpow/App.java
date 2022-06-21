@@ -3,12 +3,20 @@ package pl.rpow;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.rpow.creditcard.NameProvider;
+import pl.rpow .creditcard.NameProvider;
+import pl.rpow.payu.PayU;
 import pl.rpow.productcatalog.MapProductStorage;
 import pl.rpow.productcatalog.ProductCatalog;
 import pl.rpow.productcatalog.ProductData;
 import pl.rpow.productcatalog.ProductStorage;
 import pl.rpow.sales.*;
+import pl.rpow.sales.cart.CartStorage;
+import pl.rpow.sales.payment.DummyPaymentGateway;
+import pl.rpow.sales.payment.PayUPaymentGateway;
+import pl.rpow.sales.payment.PaymentGateway;
+import pl.rpow.sales.products.ProductDetails;
+import pl.rpow.sales.products.ProductDetailsProvider;
+import pl.rpow.sales.reservation.ReservationStorage;
 
 import java.math.BigDecimal;
 
@@ -46,11 +54,18 @@ public class App {
     }
 
     @Bean
-    Sales createSales(ProductDetailsProvider productDetailsProvider) {
+    PaymentGateway createPaymentGateway() {
+        return new PayUPaymentGateway(
+                new PayU(System.getenv("PAYU_MERCHANT_POS_ID")));
+
+    }
+
+    @Bean
+    Sales createSales(ProductDetailsProvider productDetailsProvider, PaymentGateway paymentGateway) {
         return new Sales(
                 new CartStorage(),
                 productDetailsProvider,
-                new DummyPaymentGateway(),
+                paymentGateway,
                 new ReservationStorage()
         );
     }

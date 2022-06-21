@@ -1,17 +1,31 @@
 package pl.rpow.sales;
 
+import pl.rpow.sales.cart.Cart;
+import pl.rpow.sales.cart.CartItem;
+import pl.rpow.sales.cart.CartStorage;
+import pl.rpow.sales.offer.Offer;
+import pl.rpow.sales.offer.OfferMaker;
+import pl.rpow.sales.payment.DummyPaymentGateway;
+import pl.rpow.sales.payment.PaymentData;
+import pl.rpow.sales.payment.PaymentGateway;
+import pl.rpow.sales.products.ProductDetails;
+import pl.rpow.sales.products.ProductDetailsProvider;
+import pl.rpow.sales.products.ProductNotAvailableException;
+import pl.rpow.sales.reservation.Reservation;
+import pl.rpow.sales.reservation.ReservationStorage;
+
 import java.util.UUID;
 
 public class Sales {
     CartStorage cartStorage;
     ProductDetailsProvider productDetailsProvider;
-    DummyPaymentGateway paymentGateway;
+    PaymentGateway paymentGateway;
     ReservationStorage reservationStorage;
 
     public Sales(
             CartStorage cartStorage,
             ProductDetailsProvider productDetailsProvider,
-            DummyPaymentGateway paymentGateway,
+            PaymentGateway paymentGateway,
             ReservationStorage reservationStorage) {
         this.cartStorage = cartStorage;
         this.productDetailsProvider = productDetailsProvider;
@@ -40,17 +54,18 @@ public class Sales {
 
         cart.addItem(CartItem.of(
                 productId,
-                productDetails.name,
-                productDetails.price));
+                productDetails.getName(),
+                productDetails.getPrice()));
 
         cartStorage.save(customerId, cart);
     }
 
-    public PaymentData acceptOffer(String customerId, Offer seenOffer, ClientData clientData) {
+    public PaymentData acceptOffer(String customerId, ClientData clientData) {
         Cart cart = cartStorage.getForCustomer(customerId)
                 .orElse(Cart.empty());
 
         Offer currentOffer = calculateOffer(cart);
+
         String id = UUID.randomUUID().toString();
         Reservation reservation = Reservation.of(
                 id,

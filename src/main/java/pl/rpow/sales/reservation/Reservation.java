@@ -1,4 +1,7 @@
-package pl.rpow.sales;
+package pl.rpow.sales.reservation;
+
+import pl.rpow.sales.*;
+import pl.rpow.sales.payment.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,16 +31,16 @@ public class Reservation {
         );
     }
 
-    public PaymentData registerPayment(DummyPaymentGateway paymentGateway) {
+    public PaymentData registerPayment(PaymentGateway paymentGateway) {
 
         RegisterPaymentResponse response = paymentGateway
                 .handle(RegisterPaymentRequest.builder()
-                    .email(customerInfo.getEmail())
-                    .firstname(customerInfo.getFirstname())
-                    .lastname(customerInfo.getLastname())
-                    .reservationId(id)
-                    .total(total)
-                    .build()
+                        .email(customerInfo.getEmail())
+                        .firstname(customerInfo.getFirstname())
+                        .lastname(customerInfo.getLastname())
+                        .reservationId(id)
+                        .total(total)
+                        .build()
                 );
 
         return new PaymentData(response.getId(), id, response.getUrl());

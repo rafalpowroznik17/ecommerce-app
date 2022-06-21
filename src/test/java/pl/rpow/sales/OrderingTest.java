@@ -2,6 +2,15 @@ package pl.rpow.sales;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.rpow.sales.cart.CartStorage;
+import pl.rpow.sales.offer.Offer;
+import pl.rpow.sales.offer.OfferNotMatchedException;
+import pl.rpow.sales.payment.DummyPaymentGateway;
+import pl.rpow.sales.payment.PaymentData;
+import pl.rpow.sales.products.ListProductDetailsProvider;
+import pl.rpow.sales.products.ProductDetails;
+import pl.rpow.sales.reservation.Reservation;
+import pl.rpow.sales.reservation.ReservationStorage;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -31,7 +40,7 @@ public class OrderingTest {
         Offer seenOffer = sales.getCurrentOffer(customerId);
 
         //when //act
-        PaymentData payment = sales.acceptOffer(customerId, seenOffer, exampleCustomerData());
+        PaymentData payment = sales.acceptOffer(customerId, exampleCustomerData());
 
         //then // assert
         String reservationId = payment.getReservationId();
@@ -46,7 +55,6 @@ public class OrderingTest {
         assertTrue(optionalReservation.isPresent());
     }
 
-    @Test
     void dennayPurchaseWhenOfferDifferentThenSeenOffer() {
         String productId = thereIsExampleProduct();
         Sales sales = thereIsSalesModule();
@@ -59,7 +67,6 @@ public class OrderingTest {
         assertThrows(OfferNotMatchedException.class, () -> {
             sales.acceptOffer(
                     customerId,
-                    newOffer,
                     exampleCustomerData());
         });
     }

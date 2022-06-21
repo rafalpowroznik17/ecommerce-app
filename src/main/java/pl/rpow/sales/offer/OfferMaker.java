@@ -1,4 +1,7 @@
-package pl.rpow.sales;
+package pl.rpow.sales.offer;
+
+import pl.rpow.sales.cart.Cart;
+import pl.rpow.sales.cart.CartItem;
 
 import java.math.BigDecimal;
 

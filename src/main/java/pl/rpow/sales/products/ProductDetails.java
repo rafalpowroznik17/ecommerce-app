@@ -1,4 +1,4 @@
-package pl.rpow.sales;
+package pl.rpow.sales.products;
 
 import java.math.BigDecimal;
 

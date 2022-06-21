@@ -1,7 +1,7 @@
-package pl.rpow.sales;
+package pl.rpow.sales.payment;
 
 public class DummyPaymentGateway implements PaymentGateway {
-    RegisterPaymentResponse handle(RegisterPaymentRequest registerPaymentRequest) {
+    public RegisterPaymentResponse handle(RegisterPaymentRequest registerPaymentRequest) {
         return new RegisterPaymentResponse(
                 "dummyId",
                 "https://gateway/url");

@@ -1,4 +1,4 @@
-package pl.rpow.sales;
+package pl.rpow.sales.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
